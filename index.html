@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Científica del Sur — Matriz 32×32</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js"></script>
+</head>
+
+<body>
+
+  <div id="landing" class="landing">
+    <div class="landing-card fadeIn">
+      <img id="landing-logo" src="logo.png" class="logo-big" alt="Logo" />
+      <h1>Científica del Sur</h1>
+
+      <p class="intro">
+        Bienvenido al sistema farmacéutico matricial 32×32 de la Universidad Científica del Sur
+      </p>
+
+      <button id="enter-btn" class="primary">
+        <i data-feather="log-in"></i> Entrar al sistema
+      </button>
+    </div>
+  </div>
+
+  <div id="app" class="hidden">
+
+    <header class="header fadeIn">
+      <div class="header-left">
+        <img src="logo.png" class="logo-small" alt="logo" />
+        <div>
+          <h2>Sistema Matricial 32×32</h2>
+          <p class="subtitle">Gestión Inteligente de Medicamentos</p>
+        </div>
+      </div>
+
+      <div class="header-right">
+        <button id="openManual" class="outline small">
+          <i data-feather="book"></i>&nbsp; Manual de uso
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+
+      <!-- PANEL IZQUIERDO -->
+      <aside class="panel-left">
+
+        <div class="card">
+          <h3><i data-feather="database"></i> Registrar medicamento</h3>
+
+          <label>Fila (1-32)</label>
+          <input id="inp-fila" type="number" min="1" max="32" value="1">
+
+          <label>Columna (1-32)</label>
+          <input id="inp-col" type="number" min="1" max="32" value="1">
+
+          <label>Tipo</label>
+          <select id="inp-tipo">
+            <option>Analgésico</option>
+            <option>Antibiótico</option>
+            <option>Vitamina</option>
+            <option>Vacuna</option>
+            <option>Antiviral</option>
+          </select>
+
+          <label>Ubicación</label>
+          <input id="inp-ubic" type="text">
+
+          <label>Lote</label>
+          <input id="inp-lote" type="text">
+
+          <label>Vencimiento (YYYY-MM-DD)</label>
+          <input id="inp-venc" type="date">
+
+          <label>Condiciones</label>
+          <input id="inp-cond" type="text">
+
+          <div class="row">
+            <button id="btn-registrar" class="primary small">
+              Registrar
+            </button>
+            <button id="btn-rellenar" class="secondary small">
+              Rellenar 50
+            </button>
+          </div>
+
+          <div id="msg-registrar" class="msg"></div>
+        </div>
+
+        <div class="card">
+          <h3><i data-feather="cpu"></i> Operaciones</h3>
+
+          <label>Tipo a analizar</label>
+          <select id="tipo-analizar">
+            <option>Analgésico</option>
+            <option>Antibiótico</option>
+            <option>Vitamina</option>
+            <option>Vacuna</option>
+            <option>Antiviral</option>
+          </select>
+
+          <button id="btn-construir" class="outline small">Construir matriz A</button>
+          <button id="btn-fefo" class="outline small">FEFO</button>
+          <button id="btn-riesgo" class="outline small">Riesgo</button>
+          <button id="btn-compare" class="outline small">Comparar tiempos</button>
+
+          <button id="btn-mostrar" class="primary small">Mostrar matriz</button>
+          <button id="btn-export" class="secondary small">Exportar CSV</button>
+        </div>
+
+      </aside>
+
+      <!-- PANEL DERECHO -->
+      <section class="panel-right">
+
+        <div class="card">
+          <h3><i data-feather="bar-chart-2"></i> Estadísticas del almacén</h3>
+
+          <button id="btn-stats" class="outline small">Actualizar estadísticas</button>
+
+          <div id="stats-area" class="stats-box" style="margin-top:12px;">
+            Click en actualizar estadísticas
+          </div>
+
+          <hr>
+
+          <label>Tipo a retirar</label>
+          <select id="tipo-retirar">
+            <option>Analgésico</option>
+            <option>Antibiótico</option>
+            <option>Vitamina</option>
+            <option>Vacuna</option>
+            <option>Antiviral</option>
+          </select>
+
+          <label>Cantidad</label>
+          <input id="cant-retirar" type="number" min="1" value="1">
+
+          <div style="margin-top:8px;">
+            <button id="btn-retirar" class="secondary small">Retirar</button>
+            <span id="retirar-msg"></span>
+          </div>
+
+          <hr>
+
+          <!-- NUEVO -->
+          <button id="btn-costo" class="primary small">Calcular costo</button>
+          <div id="costo-msg" class="msg" style="margin-top:10px;"></div>
+
+        </div>
+
+        <div class="card">
+          <h3><i data-feather="table"></i> Matriz 32×32</h3>
+          <div id="tabla-container" class="tabla-scroll"></div>
+        </div>
+
+        <div class="card">
+          <h3><i data-feather="file-text"></i> Logs</h3>
+          <pre id="output-log" class="log"></pre>
+        </div>
+
+      </section>
+
+    </main>
+
+    <footer class="footer">
+      Portal Institucional — Científica del Sur
+    </footer>
+
+  </div>
+
+  <script src="script.js"></script>
+  <script>feather.replace();</script>
+
+</body>
+</html>
